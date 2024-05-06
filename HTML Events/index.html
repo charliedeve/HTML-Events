@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .dragabble {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+        }
+
+        .dragging {
+            background-color: lightgreen;
+        }
+
+        .area-receptora {
+            width: 200px;
+            height: 200px;
+            background-color: lightgray;
+            border: 2px dashed gray;
+        }
+
+        .sobre {
+            background-color: lightblue;
+            border-color: blue;
+        }
+
+        .area-receptora2 {
+            width: 200px;
+            height: 200px;
+            background-color: lightgray;
+            border: 2px dashed gray;
+        }
+
+        .sobre2 {
+            background-color: lightblue;
+            border-color: blue;
+        }
+
+        .area-receptoraDrop {
+            width: 200px;
+            height: 200px;
+            background-color: lightgray;
+            border: 2px dashed gray;
+        }
+
+        .soltado {
+            background-color: lightgreen;
+            border-color: green;
+        }
+
+        .scrollable {
+            width: 200px;
+            height: 150px;
+            overflow: auto;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body oncontextmenu="clickDerecho()" onmousemove="mostrarCoordenadas(event)">
+    <h1>HTML Events</h1>
+    <h3><strong>onafterprint</strong></h3>
+    <button onclick="window.print()">Imprimir</button>
+    <hr>
+    <h3><strong>onload</strong></h3>
+
+    <img src="assets/img/Accesorios.avif" onload="onloadEvent()" alt="Imagen" style="width: 100px; height: 100px;">
+    <br>
+    <hr>
+    <h3><strong>onblur</strong></h3>
+
+    <input type="text" id="nombre" onblur="validarCampo()">
+    <br>
+    <hr>
+    <h3><strong>onchange</strong></h3>
+    <input type="text" id="apellido" onchange="onchangeInput()">
+    <br>
+    <hr>
+    <h3><strong>onfocus</strong></h3>
+    <input type="text" id="focus" onfocus="focusCampo()">
+    <br>
+    <hr>
+    <h3><strong>oninput</strong></h3>
+    <input type="text" id="oninput" oninput="mostrarTexto()">
+    <p>Texto ingresado: <span id="textoMostrado"></span></p>
+    <br>
+    <hr>
+    <h3>onivalid</h3>
+    <input type="text" id="oninvalid" required oninvalid="mostrarError()">
+    <button type="submit">Enviar</button>
+    <br>
+    <hr>
+    <h3><strong>onreset</strong></h3>
+    <form onreset>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <button type="reset">Reiniciar</button>
+    </form>
+    <br>
+    <hr>
+    <h3><strong>onselect</strong></h3>
+    <p>Selecciona el texto: </p><input type="text" id="textSelected" onselect="textSelected()">
+    <br>
+    <hr>
+    <h3><strong>onsubmit</strong></h3>
+    <form onsubmit>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+    <br>
+    <hr>
+
+    <h3><strong>onkeydown</strong></h3>
+    <input type="text" id="keydown" placeholder="keyDown" onkeydown="keyDown(event)">
+    <hr>
+    <h3><strong>onkeydown</strong></h3>
+    <input type="text" id="keypress" placeholder="keyPress" onkeypress="onkeyPress(event)">
+    <hr>
+    <h3><strong>onkeyup</strong></h3>
+    <input type="text" id="keyup" placeholder="keyUp" onkeyup="onkeyUp(event)">
+    <br>
+    <hr>
+
+    <h3><strong>onclick</strong></h3>
+    <button onclick="onclickEvent()">Onclick</button>
+    <hr>
+    <h3><strong>ondblclick</strong></h3>
+    <button ondblclick="doubleClick()">Ondblclick</button>
+    <hr>
+    <h3><strong>onmousedown</strong></h3>
+    <button onmousedown="mouseDown()">Onmousedown</button>
+    <hr>
+    <h3><strong>onmouseout y onmouseover</strong></h3>
+    <div onmouseout="restaurarColor(this)" onmouseover="cambiarColor(this)"
+        style="width: 200px; height: 100px; background-color: white;">
+        <p>Mueve el ratón dentro y fuera de este área para cambiar el color.</p>
+    </div>
+    <br>
+    <hr>
+
+    <h3><strong>onmouseup</strong></h3>
+    <button onmouseup="mouseUp()">Click</button>
+    <br>
+    <hr>
+
+    <h3><strong>onwheel</strong></h3>
+    <div style="width: 100px; height: 100px; background-color: lightgray;" onwheel="wheelEvent(event)">
+        <p>Haz scroll dentro de este área.</p>
+    </div>
+    <br>
+    <hr>
+
+    <h3><strong>dragstart y ondragend</strong></h3>
+    <div class="dragabble" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+        Arrástrame
+    </div>
+
+    <h3><strong>ondragenter y ondragleave</strong></h3>
+    <div class="area-receptora" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+        Arrastra un elemento aquí
+    </div>
+    <br>
+    <hr>
+    <h3><strong>ondragover</strong></h3>
+    <div class="area-receptora2" ondragover="dragOver(event)" ondragleave="dragLeaveOver(event)">
+        <br>
+        <hr>
+        <div class="dragabble" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+            Arrástrame
+        </div>
+        <h3><strong>ondrop</strong></h3>
+        <div class="area-receptoraDrop" ondrop="Drop(event)" ondragover="dragOverDrop(event)"
+            ondragleave="dragLeaveDrop(event)">
+            Suelta un elemento aquí
+        </div>
+        <br>
+        <hr>
+        <h3><strong>onscroll</strong></h3>
+        <div id="scrollableDiv" class="scrollable" onscroll="Scroll()">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci at dolores commodi, facilis
+                omnis odit veritatis sit soluta doloremque aliquam sed, ab debitis nobis ut modi molestias
+                necessitatibus iste aperiam?.</p>
+
+        </div>
+        <br>
+        <hr>
+        <h3><strong>oncopy, oncut y onpaste</strong></h3>
+        <textarea oncopy="onCopy()" oncut="onCut()" onpaste="onPaste()">Selecciona y copia este texto.</textarea>
+        <br>
+        <hr>
+
+        <h3><strong>onabort y onprogress</strong></h3>
+        <img src="assets/img/Accesorios.avif" onabort="onAbort()" onprogress="onProgress(event)"
+            style="width: 100px; height: 100px;">
+        <br>
+        <hr>
+        <h3><strong>oncanplaythrough, onended, onpause, onplay y onvolumechange</strong></h3>
+        <audio id="audio" controls oncanplaythrough="onCanPlayThrough()" onended="onEnded()" onpause="onPause()"
+            onplay="onPlay()" onvolumechange="onVolumeChange()">
+            <source src="assets/media/øneheart x reidenshi - snowfall.mp3" type="audio/mpeg">
+        </audio>
+        <br>
+        <hr>
+
+        <h3><strong>ondurationchange, onratechange, onseeking y onstalled</strong></h3>
+        <video id="video" controls ondurationchange="onDurationChange()" onratechange="onRateChange()"
+            onseeking="onSeeking()" onstalled="onStalled()">
+            <source src="assets/media/øneheart x reidenshi - snowfall.mp4" type="video/mp4">
+        </video>
+
+        <script src="assets/js/events.js"></script>
+</body>
+
+</html>
